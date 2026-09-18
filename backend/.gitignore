@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+shareride.db
+uploads/*
+!uploads/mock-doc-front.jpg
+!uploads/mock-doc-back.jpg
+.env
