@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, EmailStr, ConfigDict, computed_field
 
 
 # ---------- Auth ----------
@@ -94,6 +94,7 @@ class RequestCreateIn(BaseModel):
     time: str
     seats_needed: int = 1
     description: str = ""
+    taxi_fare_estimate: Optional[int] = None
 
 
 class RequestOut(BaseModel):
@@ -111,6 +112,15 @@ class RequestOut(BaseModel):
     created_at: datetime
     requester: UserPublicOut
     response_count: int = 0
+    taxi_fare_estimate: Optional[int] = None
+
+    @computed_field
+    @property
+    def suggested_price(self) -> Optional[int]:
+        """Prix indicatif ShareRide : toujours la moitié du tarif taxi de référence."""
+        if self.taxi_fare_estimate is None:
+            return None
+        return self.taxi_fare_estimate // 2
 
 
 # ---------- Responses ----------

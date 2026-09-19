@@ -68,11 +68,6 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <div className="mt-5 p-3.5 rounded-xl bg-primary/5 border border-primary/10 text-xs text-ink/60 dark:text-white/60">
-        <p className="font-semibold text-primary mb-1">Compte de démo</p>
-        ahmed@ipnet.tg / password123
-      </div>
-
       <p className="text-center text-sm text-ink/50 dark:text-white/50 mt-6">
         Pas encore de compte ?{" "}
         <Link href="/auth/signup" className="text-primary font-semibold hover:underline">

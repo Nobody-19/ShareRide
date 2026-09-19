@@ -98,6 +98,7 @@ class RideRequest(Base):
     seats_needed = Column(Integer, default=1)
     description = Column(String, default="")
     status = Column(Enum(RequestStatus), default=RequestStatus.ACTIVE)
+    taxi_fare_estimate = Column(Integer, nullable=True)  # FCFA, prix taxi habituel pour ce trajet
 
     created_at = Column(DateTime, default=datetime.utcnow)
 

@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Calendar, Clock, Users, Minus, Plus, Sparkles } from "lucide-react";
+import { Calendar, Clock, Users, Minus, Plus, Sparkles, Coins } from "lucide-react";
 import { toast } from "sonner";
 import { Topbar } from "@/components/layout/Topbar";
 import { Button } from "@/components/ui/Button";
 import { Input, TextArea } from "@/components/ui/Input";
 import { PlaceAutocomplete } from "@/components/ui/PlaceAutocomplete";
 import { api, apiErrorMessage } from "@/lib/api";
+import { formatFCFA } from "@/lib/format";
 
 export default function NewRequestPage() {
   const router = useRouter();
@@ -17,8 +18,12 @@ export default function NewRequestPage() {
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [time, setTime] = useState("07:00");
   const [seats, setSeats] = useState(1);
+  const [taxiFare, setTaxiFare] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const taxiFareNum = Number(taxiFare);
+  const suggestedPrice = taxiFare && taxiFareNum > 0 ? Math.floor(taxiFareNum / 2) : null;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,6 +36,7 @@ export default function NewRequestPage() {
         time,
         seats_needed: seats,
         description,
+        taxi_fare_estimate: suggestedPrice ? taxiFareNum : null,
       });
       toast.success("Ta requête est en ligne !");
       router.push(`/responses/${data.id}?created=1`);
@@ -99,6 +105,24 @@ export default function NewRequestPage() {
                 <Plus className="w-4 h-4" />
               </button>
             </div>
+          </div>
+
+          <div>
+            <Input
+              label="Prix taxi habituel (FCFA)"
+              type="number"
+              min={0}
+              inputMode="numeric"
+              icon={<Coins className="w-4 h-4" />}
+              placeholder="Ex: 500"
+              value={taxiFare}
+              onChange={(e) => setTaxiFare(e.target.value)}
+            />
+            {suggestedPrice !== null && (
+              <p className="text-xs text-success-700 dark:text-success font-semibold mt-1.5 bg-success/10 rounded-lg px-3 py-2">
+                Prix ShareRide suggéré : {formatFCFA(suggestedPrice)} (50% du tarif taxi) — à régler en direct avec ton conducteur.
+              </p>
+            )}
           </div>
 
           <TextArea

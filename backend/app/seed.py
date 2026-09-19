@@ -66,17 +66,17 @@ def seed():
         requests_data = [
             dict(
                 requester_id=ahmed.id, departure="Cité OUA", destination="Université de Lomé",
-                date=today, time="07:00", seats_needed=2,
+                date=today, time="07:00", seats_needed=2, taxi_fare_estimate=500,
                 description="Je pars du campus, je peux prendre 2 passagers en moto (chacun son tour).",
             ),
             dict(
                 requester_id=kofi.id, departure="Agoè", destination="Gare routière",
-                date=today, time="08:30", seats_needed=1,
+                date=today, time="08:30", seats_needed=1, taxi_fare_estimate=400,
                 description="Besoin d'aller à la gare routière, urgent.",
             ),
             dict(
                 requester_id=amara.id, departure="Cité OUA", destination="Université de Lomé",
-                date=tomorrow, time="07:15", seats_needed=3,
+                date=tomorrow, time="07:15", seats_needed=3, taxi_fare_estimate=600,
                 description="Flexible sur l'horaire, voiture climatisée.",
             ),
         ]

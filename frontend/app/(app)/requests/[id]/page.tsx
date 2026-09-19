@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { MapPin, Clock, Users, GraduationCap, MessageSquareHeart, ArrowLeft, HandHeart } from "lucide-react";
+import { MapPin, Clock, Users, GraduationCap, MessageSquareHeart, ArrowLeft, HandHeart, Coins } from "lucide-react";
 import { toast } from "sonner";
 import { Topbar } from "@/components/layout/Topbar";
 import { Button } from "@/components/ui/Button";
@@ -15,7 +15,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { api, apiErrorMessage } from "@/lib/api";
 import { RideRequest, Rating } from "@/lib/types";
 import { useAuth } from "@/lib/auth-context";
-import { formatRequestDate } from "@/lib/format";
+import { formatRequestDate, formatFCFA } from "@/lib/format";
 
 export default function RequestDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -118,6 +118,22 @@ export default function RequestDetailPage() {
             </p>
           )}
         </div>
+
+        {request.suggested_price != null && (
+          <div className="bg-success/8 border border-success/20 rounded-2xl p-5 flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-success/15 flex items-center justify-center shrink-0">
+              <Coins className="w-5 h-5 text-success-700 dark:text-success" />
+            </div>
+            <div className="min-w-0">
+              <p className="font-extrabold text-success-700 dark:text-success">
+                {formatFCFA(request.suggested_price)} suggéré
+              </p>
+              <p className="text-xs text-ink/55 dark:text-white/55 mt-0.5">
+                Au lieu de ~{formatFCFA(request.taxi_fare_estimate!)} en taxi — à régler directement, en cash ou Mobile Money.
+              </p>
+            </div>
+          </div>
+        )}
 
         {ratings && ratings.length > 0 && (
           <div className="bg-card rounded-2xl p-5 shadow-soft border border-ink/6 dark:border-white/6 space-y-3">

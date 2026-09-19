@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { LogoBadge } from "@/components/ui/Logo";
 
@@ -23,6 +24,7 @@ export function AuthShell({ children, title, subtitle }: { children: React.React
         </Link>
 
         <div className="relative space-y-7">
+          <Image src="/brand/logo-icon.png" alt="ShareRide" width={208} height={87} className="w-52 h-auto" priority />
           <h1 className="text-3xl font-extrabold leading-[1.15] text-balance tracking-tight">
             Le covoiturage étudiant qui connecte le campus.
           </h1>

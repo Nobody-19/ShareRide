@@ -11,3 +11,7 @@ export function formatRequestDate(dateStr: string) {
 export function formatTime(timeStr: string) {
   return timeStr;
 }
+
+export function formatFCFA(amount: number) {
+  return `${amount.toLocaleString("fr-FR")} FCFA`;
+}

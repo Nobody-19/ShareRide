@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { MapPin, Clock, Users, ChevronRight } from "lucide-react";
+import { MapPin, Clock, Users, ChevronRight, Coins } from "lucide-react";
 import { RideRequest } from "@/lib/types";
 import { Avatar } from "../ui/Avatar";
 import { StarDisplay } from "../ui/StarRating";
-import { VerifiedBadge } from "../ui/Badge";
-import { formatRequestDate } from "@/lib/format";
+import { VerifiedBadge, Badge } from "../ui/Badge";
+import { formatRequestDate, formatFCFA } from "@/lib/format";
 
 export function RequestCard({ request }: { request: RideRequest }) {
   return (
@@ -49,6 +49,13 @@ export function RequestCard({ request }: { request: RideRequest }) {
           </span>
         )}
       </div>
+
+      {request.suggested_price != null && (
+        <Badge color="success" className="mt-2.5">
+          <Coins className="w-3.5 h-3.5" />
+          {formatFCFA(request.suggested_price)} — moitié prix du taxi
+        </Badge>
+      )}
 
       {request.description && (
         <p className="text-xs text-ink/45 dark:text-white/45 mt-2.5 line-clamp-1 italic">&ldquo;{request.description}&rdquo;</p>

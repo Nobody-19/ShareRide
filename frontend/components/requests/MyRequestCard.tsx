@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { MapPin, Clock, Users, Inbox } from "lucide-react";
+import { MapPin, Clock, Users, Inbox, Coins } from "lucide-react";
 import { RideRequest } from "@/lib/types";
 import { Badge } from "../ui/Badge";
-import { formatRequestDate } from "@/lib/format";
+import { formatRequestDate, formatFCFA } from "@/lib/format";
 
 const STATUS_LABEL: Record<string, { label: string; color: "primary" | "secondary" | "success" | "gray" }> = {
   active: { label: "Active", color: "success" },
@@ -46,6 +46,12 @@ export function MyRequestCard({ request }: { request: RideRequest }) {
           <Users className="w-3.5 h-3.5" />
           {request.seats_needed} place{request.seats_needed > 1 ? "s" : ""}
         </span>
+        {request.suggested_price != null && (
+          <span className="ml-auto inline-flex items-center gap-1 font-semibold text-success-700 dark:text-success">
+            <Coins className="w-3.5 h-3.5" />
+            {formatFCFA(request.suggested_price)}
+          </span>
+        )}
       </div>
     </Link>
   );

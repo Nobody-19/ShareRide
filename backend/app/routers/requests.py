@@ -69,6 +69,7 @@ def create_request(
         time=payload.time,
         seats_needed=payload.seats_needed,
         description=payload.description,
+        taxi_fare_estimate=payload.taxi_fare_estimate,
         status=RequestStatus.ACTIVE,
     )
     db.add(req)

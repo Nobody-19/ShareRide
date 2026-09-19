@@ -53,6 +53,8 @@ export interface RideRequest {
   created_at: string;
   requester: UserPublic;
   response_count: number;
+  taxi_fare_estimate?: number | null;
+  suggested_price?: number | null;
 }
 
 export interface RideResponse {
