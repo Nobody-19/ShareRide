@@ -66,7 +66,7 @@ export default function LandingPage() {
         <motion.div initial="hidden" animate="show" variants={fadeUp}>
           <p className="text-xs font-bold tracking-[0.14em] text-primary uppercase mb-4">Covoiturage étudiant · Togo</p>
           <h1 className="text-[2.6rem] sm:text-5xl font-extrabold leading-[1.08] tracking-tight text-balance text-ink">
-            Trouve un trajet vers ton campus, pas un inconnu au hasard.
+            Le covoiturage qui reste entre étudiants.
           </h1>
           <p className="text-ink/55 text-lg max-w-md mt-5 leading-relaxed">
             Poste ta requête, et les étudiants vérifiés qui vont dans ta direction te répondent
